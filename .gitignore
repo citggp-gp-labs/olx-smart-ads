@@ -1,0 +1,36 @@
+# Bytecode compiled files
+*.pyc
+__pycache__/
+*.pyo
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyCharm
+#  JetBrains specific template is at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
+.idea/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Log files
+*.log
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.swp
+*~
