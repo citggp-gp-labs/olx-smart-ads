@@ -1,11 +1,16 @@
+import os
+from jinja2 import Environment, FileSystemLoader
 from middleware.prompts import prompts
 import json
 from middleware.services import gemini
 
-def run(data, categories):
+async def run(data, categories):
 
     try:
-        categorization = prompts.list_indication_prompt_v3(data['ad_title'], categories)
+        prompts_dir = os.path.join(os.path.dirname(__file__), '..', 'prompts')
+        env = Environment(loader=FileSystemLoader(prompts_dir))
+        template = env.get_template('prompts.txt')
+        categorization = template.render({"categories": categories, "description" : data['ad_title']})
 
         categorization_response = gemini.gemini_pro(prompt=categorization).text
 

@@ -1,10 +1,15 @@
+import os
+from jinja2 import Environment, FileSystemLoader
 from middleware.prompts import prompts
 import json
 from middleware.services import gemini_image
 
-def run(data, categories_data):
+async def run(data, categories):
     try:
-        prompt = prompts.list_indication_prompt_v3(data['ad_title'], categories_data)
+        prompts_dir = os.path.join(os.path.dirname(__file__), '..', 'prompts')
+        env = Environment(loader=FileSystemLoader(prompts_dir))
+        template = env.get_template('prompts.txt')
+        prompt = template.render({"categories": categories, "description" : data['ad_title']})
 
         response = gemini_image.generate(
             prompt=prompt, image_url=data['image_url'])

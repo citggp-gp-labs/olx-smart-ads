@@ -13,6 +13,6 @@ async def root():
 async def unified_categorization_v3(request: Request):
     data = await request.json()
     if not data.get('image_url'):
-        return categorization_service.run(data, categories)
+        return await categorization_service.run(data, categories)
     else:
-        return image_categorization_service.run(data, categories)
+        return await image_categorization_service.run(data, categories)
