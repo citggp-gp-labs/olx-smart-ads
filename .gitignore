@@ -21,8 +21,12 @@ wheels/
 
 # Virtual environments
 .venv/
+olx_refactor
 venv/
 env/
+
+# Debugging
+.vscode
 
 # Log files
 *.log

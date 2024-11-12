@@ -18,6 +18,7 @@ def run(data, categories):
         ]
 
     except Exception as ex:
+        print(ex)
         categories = {
             "categories": [
                 {
