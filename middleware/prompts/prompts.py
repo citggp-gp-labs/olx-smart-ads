@@ -1,0 +1,61 @@
+def list_indication_prompt_v3(description, categories):
+    return """Você receberá uma estrutura de dados representando categorias e subcategorias hierárquicas. Os dados serão fornecidos como uma lista de dicionários em formato JSON. Cada dicionário representa uma categoria e possui as seguintes chaves:
+
+* `"id"`: Um número representando o identificador único de uma categoria principal, ou categoria ou subcategoria, a depender do nível.
+* `"name"`: Uma string representando o nome da categoria principal, ou categoria, ou subcategoria, a depender do nível.
+* `"children"`: Uma lista de dicionários, onde cada dicionário representa uma categoria ou subcategoria.
+
+Exemplo:
+json
+{
+    "id": "string",
+    "name": "string",
+    "children": [
+        {
+            "id": "string",
+            "name": "string",
+            "params": {},
+            "children": [
+                {
+                    "id": "string",
+                    "name": "string"
+                }
+            ]
+        }
+    ]
+}
+
+Regras:
+- Considere que este json é uma lista de categorias-principal, categorias e sub-categorias, onde categoria-principal é o mais alto, e sub-categoria é o mais baixo.
+- Na resposta, sempre responda com o id mais baixo e para o parent id, considere o mais alto.
+- Limite sua resposta, para no máximo 3 itens na lista.
+- O título do anúncio, é um anúncio de venda de um produto ou serviço em uma plataforma de vendas.
+- Entenda melhor o título antes de classificar.
+- Não confunda categoria principal com categoria.
+- A chave 'params' deve ser levada em consideração apenas para contextualização, não deve jamais aparecer na resposta final.
+- Sua resposta precisa estar em um formato JSON, e deve seguir esse padrão: 
+{
+  "categories": [
+    {
+      "category_id": int,
+      "category_name": "string", 
+      "probability": float,
+      "parent_id": int,
+      "category_main_name": "string",
+    }
+  ]
+}.
+- Junto da resposta, fale para cada categoria qual a probabilidade de estar correta. Uso o campo probability para isso.
+- Os campos parent_id e category_main_name estão relacionados a categoria principal.
+- Os campos category_name e category_id estão relacionadas a categoria e subcategoria.
+- Os campos parent_id e category_id não podem ter o mesmo valor dentro do mesmo item na lista. Caso isso aconteça, remova esse item da sua resposta.
+- Se na sua resposta final, parent_id ou category_id estiver null, remove esse item de sua resposta.
+
+Lista de categorias e subcategorias hierárquicas: 
+%s
+
+Título do anúncio: 
+%s
+
+Começe! Retorne apenas o JSON.
+""" % (categories, description)
