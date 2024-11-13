@@ -1,0 +1,12 @@
+# Python Local Env
+venv/
+.venv/
+olx_refactor/
+.olx_refactor/
+*.env
+
+# JetBrains IDE
+.idea/
+
+# Vscode
+.vscode/
