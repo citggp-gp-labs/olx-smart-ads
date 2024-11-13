@@ -1,5 +1,6 @@
 import requests
 
+
 class Api:
     def __init__(self):
         self.api_url = "https://ck-gw.olx.com.br/categories/simple"

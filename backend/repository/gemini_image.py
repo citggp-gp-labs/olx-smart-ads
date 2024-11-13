@@ -1,7 +1,9 @@
 import os
+
 import vertexai
-from vertexai.generative_models import GenerativeModel, Part
 import vertexai.preview.generative_models as generative_models
+from vertexai.generative_models import GenerativeModel, Part
+
 
 class GeminiImage:
     DEFAULT_MODEL = "gemini-1.5-flash-002"
@@ -27,12 +29,14 @@ class GeminiImage:
         self.top_k = top_k
         self.temperature = temperature
 
-    def generate(self, prompt: str, image_url: str):
+    async def generate(self, prompt: str, image_url: str):
         _, file_extension = os.path.splitext(image_url)
         file_extension = file_extension[1:].lower()
 
-        if file_extension.lower() not in ['jpg', 'jpeg', 'png', 'webp', 'gif', 'heic']:
-            raise ValueError(f"Unsupported image format: {file_extension}. These image format is not supported.")
+        if file_extension.lower() not in ["jpg", "jpeg", "png", "webp", "gif", "heic"]:
+            raise ValueError(
+                f"Unsupported image format: {file_extension}. These image format is not supported."
+            )
 
         image = Part.from_uri(
             mime_type=f"image/{file_extension}",
