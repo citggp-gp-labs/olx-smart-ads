@@ -1,20 +1,22 @@
 import json
 import os
-
 from jinja2 import Environment, FileSystemLoader
-
 from backend.repository.api import Api
 from backend.repository.gemini_image import GeminiImage
 from backend.repository.gemini_text import GeminiPro
 
 # Instance gemini model
 gemini = GeminiPro(
-    project="ciandt-gcp-partnership", location="us-east4", model="gemini-1.5-flash-002"
+    project=os.getenv('PROJECT_ID'),
+    location=os.getenv('PROJECT_LOCATION'),
+    model=os.getenv('DEFAULT_MODEL_VERSION')
 )
 
 # Instance gemini image model
 gemini_image = GeminiImage(
-    project="ciandt-gcp-partnership", location="us-east4", model="gemini-1.5-flash-002"
+    project=os.getenv('PROJECT_ID'),
+    location=os.getenv('PROJECT_LOCATION'),
+    model=os.getenv('DEFAULT_MODEL_VERSION')
 )
 
 categories_api = Api()

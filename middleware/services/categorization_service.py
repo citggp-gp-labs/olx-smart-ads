@@ -1,5 +1,5 @@
 import json
-
+import logging
 from middleware.services import gemini, template
 
 
@@ -26,9 +26,16 @@ async def run(data, categories):
             and category["category_id"] is not None
         ]
 
+        log = {
+            'url': 'v3/unified_categorization',
+            'request': data,
+            'response': categorization_response,
+        }
+        logging.info(log)
+
     # tratar melhor as exceções, não deixar genérico assim
     except Exception as ex:
-        print(ex)
+        logging.error(ex)
         categories = {
             "categories": [
                 {

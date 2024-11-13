@@ -6,7 +6,7 @@ from vertexai.generative_models import GenerativeModel, Part
 
 
 class GeminiImage:
-    DEFAULT_MODEL = "gemini-1.5-flash-002"
+    DEFAULT_MODEL = os.getenv('DEFAULT_MODEL_VERSION')
     MAX_OUTPUT_TOKENS = 1000
     TOP_P = 1
     TOP_K = 40

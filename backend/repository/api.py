@@ -1,4 +1,5 @@
 import requests
+import logging
 
 
 class Api:
@@ -14,6 +15,6 @@ class Api:
             if response.status_code == 200:
                 self.categories = response.json()
             else:
-                print(f"Error calling the API: {response.status_code}")
+                logging.error("Error calling the API: %s", response.status_code)
         except requests.exceptions.Timeout:
-            print("API call timed out")
+            logging.error("API call timed out")

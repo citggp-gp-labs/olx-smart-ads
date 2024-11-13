@@ -1,10 +1,11 @@
+import os
 import vertexai
 import vertexai.generative_models as generative_models
 from vertexai.generative_models import GenerativeModel
-
+import logging
 
 class GeminiPro:
-    DEFAULT_MODEL = "gemini-1.5-flash-002"
+    DEFAULT_MODEL = os.getenv('DEFAULT_MODEL_VERSION')
     TEMPERATURE = 0
     TOP_P = 1
     MAX_OUTPUT_TOKENS = 242
@@ -40,4 +41,4 @@ class GeminiPro:
             )
             return generated_content
         except Exception as e:
-            print(e)
+            logging.error(e)

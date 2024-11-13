@@ -1,3 +1,5 @@
+import os
+import logging
 from fastapi import FastAPI, Request
 
 import middleware.services.categorization_service as categorization_service
@@ -6,6 +8,19 @@ from middleware.services import categories_dumped
 
 app = FastAPI()
 
+log_level = os.environ.get('LOG_LEVEL', 'INFO').upper()
+
+level_mapping = {
+    'DEBUG': logging.DEBUG,
+    'INFO': logging.INFO,
+    'WARNING': logging.WARNING,
+    'ERROR': logging.ERROR,
+    'CRITICAL': logging.CRITICAL,
+}
+
+log_level_numeric = level_mapping.get(log_level, logging.INFO)
+
+logging.getLogger().setLevel(log_level_numeric)
 
 @app.get("/")
 async def root():

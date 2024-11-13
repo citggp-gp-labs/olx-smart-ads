@@ -1,7 +1,6 @@
 import json
-
 from middleware.services import gemini_image, template
-
+import logging
 
 async def run(data, categories):
     try:
@@ -24,8 +23,15 @@ async def run(data, categories):
             and category["category_id"] is not None
         ]
 
+        log = {
+            'url': 'v3/unified_categorization',
+            'request': data,
+            'response': categories_response,
+        }
+        logging.info(log)
+
     except Exception as ex:
-        print(ex)
+        logging.error(ex)
         categories_response = {
             "categories": [
                 {
