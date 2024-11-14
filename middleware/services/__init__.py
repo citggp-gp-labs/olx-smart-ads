@@ -1,9 +1,15 @@
 import json
 import os
 from jinja2 import Environment, FileSystemLoader
+
 from backend.repository.api import Api
 from backend.repository.gemini_image import GeminiImage
 from backend.repository.gemini_text import GeminiPro
+import backend.core.config as config
+
+config.load()
+
+print(f"Nome do modelo: {os.getenv('DEFAULT_MODEL_VERSION')}")
 
 # Instance gemini model
 gemini = GeminiPro(

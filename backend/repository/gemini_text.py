@@ -1,8 +1,10 @@
+import logging
 import os
+
 import vertexai
 import vertexai.generative_models as generative_models
 from vertexai.generative_models import GenerativeModel
-import logging
+
 
 class GeminiPro:
     DEFAULT_MODEL = os.getenv('DEFAULT_MODEL_VERSION')
@@ -10,7 +12,7 @@ class GeminiPro:
     TOP_P = 1
     MAX_OUTPUT_TOKENS = 242
 
-    def __init__(self, project: str, location: str, model: str):
+    def __init__(self, project: str, location: str, model: str = DEFAULT_MODEL):
         vertexai.init(project=project, location=location)
         self.project = project
         self.location = location
